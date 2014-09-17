@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% autoescape false %}
-<html lang="en" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml">
+<html lang="en" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope itemtype="http://schema.org/Article">
 <head>
     <!-- Facebook metadata -->
     <meta property="og:title" content="Deseret Alphabet Translator"/>
@@ -10,6 +10,17 @@
     <meta property="og:site_name" content="2deseret.com"/>
     <meta property="og:description" content="Bad speller? You'd have thanked Brigham Young for the Deseret Alphabet. Transport yourself to 1850s Territorial Utah with this useless but fascinating English-to-Deseret-Alphabet translator."/>
     <!-- End Facebook metadata -->
+
+    <!-- Google+ metadata -->
+    <!-- Add the following three tags inside head. -->
+    <meta itemprop="name" content="Deseret Alphabet Translator">
+    <meta itemprop="description" content="English-to-Deseret-Alphabet translator">
+    <meta itemprop="image" content="http://2deseret.org/images/fb.png">
+
+    <!-- +1 button: Place this tag in your head or just before your close body tag. -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <!-- End Google+ -->
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,6 +46,18 @@
 
   </head>
   <body role="document">
+  <div id="fb-root"></div>
+
+  <!-- Facebook Like -->
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- end Facebook like -->
+
   	<div class="container-fluid" role="main">
   	<div class="row">
   	<div class="col-md-2">
@@ -48,6 +71,13 @@
     </form>
 
     <textarea id="output_well" class="form-control" rows="10">{{ output_text }}</textarea>
+
+    <!-- Facebook and Google+ buttons -->
+    <div class="social-buttons">
+    <div class="fb-like" data-href="http://2deseret.com" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
+    <div class="g-plusone-container"><div class="g-plusone" data-annotation="none" data-href="http://2deseret.com"></div></div>
+    </div>
+
 
     <div class="help-links">
 	    <div class="help-link"><b>More Deseret Alphabet</b></div>
