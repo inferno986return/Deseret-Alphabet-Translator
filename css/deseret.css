@@ -1,0 +1,99 @@
+/* @override http://localhost:8080/css/deseret.css */
+html, body {
+	background-color: #e6e2c9;
+}
+
+body, h1, div {
+	font-family: 'IM Fell English', serif;	
+}
+h1 {
+	margin: 70px auto 30px auto;
+	text-align: center;
+	color: #444;
+	font-size: 42px;
+}
+
+.help-links {
+	margin-top: 50px;
+}
+.help-link {
+	text-align: center;
+	font-size: 16px;
+/*	padding: 20px 0 10px 0;	*/
+}
+.help-link a {
+	color: #2695b8;
+	text-decoration: none;
+}
+
+.help-link a:hover {
+	color: #1c7995;	
+}
+
+.help-link .glyphicon {
+	padding-left: 4px;
+}
+
+.help-link b {	
+	color: #2695b8;
+	font-style: italic;
+	font-weight: normal;
+}
+
+#translate_button {
+	font-size: 22px;
+	margin: 25px 0;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+#output_well {
+	font-size: 14px;
+	background-color: #f0eedb;
+	font-size: 18px;
+	color: #222;
+	font-family: "AdamicBee";
+}
+
+#input_well {
+	background-color: #fdfef6;
+	font-size: 20px;
+	color: #333;
+}
+
+#input_well, #output_well {
+	padding: 20px;
+}
+.info-link, .info-link a {
+	display: inline;
+}
+
+.notes {
+	font-style: italic;
+	padding-top: 45px;
+	padding-bottom: 30px;
+	font-size: 18px;
+	color: #333;
+}
+
+.copyright {
+	font-size: 14px;
+	margin: 30px 0;
+	font-style: italic;
+}
+
+@font-face {
+  font-family: 'AdamicBee';
+  src: url('/fonts/AdamicBee.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/AdamicBee.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/AdamicBee.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/AdamicBee.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/AdamicBee.svg#159e7fbb74bf1cefffafc0996ebf38fb') format('svg'); /* Legacy iOS */
+
+  font-style:   normal;
+  font-weight:  400;
+}
+
+.adamic {
+    font-family: "AdamicBee";
+}
