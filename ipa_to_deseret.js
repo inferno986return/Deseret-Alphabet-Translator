@@ -1,5 +1,9 @@
 // Taken from Neil Alexander Walker, "A Complete Guide to Reading and Writing the Deseret Alphabet"
 // http://copper.chem.ucla.edu/~jericks/Historical%20or%20Technical/Linguistics/Deseret_Guide.pdf
+//
+// To strip comments and create valid JSON file:
+//
+//   $ python -m jsmin ipa_to_deseret.js > ipa_to_deseret.json
 
 {
 	"&":	"66568",	/* sounds like the "a" in "dab" */
@@ -48,6 +52,3 @@
 	"z":	"66590"	/* sounds like the "z" in "zoo" */
 }
 
-
-// https://github.com/sam1am/deseret.in/blob/master/index.php
-// https://github.com/sam1am/deseret.in/blob/master/funcs.php
