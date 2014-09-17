@@ -3,14 +3,14 @@
 <html>
   <head>
   	<title>Deseret Alphabet Translator</title>
-  	<link href='http://fonts.googleapis.com/css?family=IM+Fell+English:400,400italic' rel='stylesheet' type='text/css'>
+  	<link href='//fonts.googleapis.com/css?family=IM+Fell+English:400,400italic' rel='stylesheet' type='text/css'>
 
   	<!-- Bootstrap -->
   	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 	<!-- End Bootstrap -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -33,22 +33,27 @@
     
     <form action="/" method="post">
       <div><textarea id="input_well" name="input_text" class="form-control" rows="8" placeholder="Enter English text here.">{{ input_text }}</textarea></div>
-      <div><input id="translate_button" type="submit" class="btn btn-info" value="English to Deseret"></div class="info-link"> 
+      <button id="translate_button" type="submit" class="btn btn-info" value="Translate"><span class="glyphicon glyphicon-circle-arrow-down"></span> Translate </button>
     </form>
 
-    <textarea id="output_well" class="form-control" rows="8">{{ output_text }}</textarea>
+    <textarea id="output_well" class="form-control" rows="10">{{ output_text }}</textarea>
 
     <div class="help-links">
 	    <div class="help-link"><b>More Deseret Alphabet</b></div>
 	    <div class="help-link"><a title="Wikipedia entry about the Deseret Alphabet" href="//en.wikipedia.org/wiki/Deseret_alphabet">Wikipedia</a></div>
 
-	    <div class="help-link"><a title="xkcd Deseret Alphabet Edition" href="//www.deseretalphabet.info/XKCD/">xkcd Deseret Alphabet Edition</a></div>
-	</div>
+	    <div class="help-link"><a title="xkcd Deseret Alphabet Edition" href="http://www.deseretalphabet.info/XKCD/">xkcd Deseret Alphabet Edition</a></div>
+      <div class="help-link"><a title="xkcd Deseret Alphabet Edition" href="http://elliotec.com/writing-in-the-deseret-alphabet/">Writing in the Deseret Alphabet (WebFonts)</a></div>
+      <div class="help-link"><a title="DeseretAlphabet.org" href="http://www.deseretalphabet.org">DeseretAlphabet.org</a></div>
+      <div class="help-link"><a title="" href="http://copper.chem.ucla.edu/~jericks/Historical%20or%20Technical/Linguistics/Deseret_Guide.pdf">A Complete Guide to Reading and Writing the Deseret Alphabet</a></div>
+      <br/>
+      <div class="help-link">This application uses pronunciation data from the <a href="//en.wikipedia.org/wiki/Moby_Project#Pronunciator">Moby Project</a>.</div>
+	 </div>
 
-    <div class="copyright">Created by Nathan Hadfield</div>
+    <div class="copyright">Created by Nathan Hadfield<br/>Questions or comments? <a href="//bitbucket.org/twistedroot/deseret-alphabet-translator/issues">I'd love to hear from you.</a></div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  	
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 	</div>
 	</div>
