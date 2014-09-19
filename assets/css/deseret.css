@@ -112,22 +112,18 @@ a:hover {
 
 .fb-like {
 	position: absolute;
-	margin-top: 2px;
-	display: inline-block;
+	display: block;	
 }
 
 .g-plusone-container {
-	position: absolute;
-	display: inline-block;
-	padding-top:  0px;
-	margin-top: 0px;
-	margin-left: 30px;
+	display: block;
+	margin-top: 10px;	
 }
 
-.social-buttons{
-	position: relative;
+.social-buttons {
+	text-align: left;
+	margin-left: 10px;
 	margin-top: 30px;
-	margin-left: -85px
 }
 
 #brigham-quote {
