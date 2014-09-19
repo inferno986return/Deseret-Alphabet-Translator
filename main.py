@@ -36,6 +36,7 @@ class MainPage(webapp2.RequestHandler):
         if english:
             deseret = d.translate(english)
         else:
+            english = ""
             deseret = ""
 
         template_values = {
