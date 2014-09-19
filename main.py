@@ -1,6 +1,6 @@
 import os
 import urllib
-import logging
+#import logging
 
 import jinja2
 import webapp2

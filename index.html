@@ -6,6 +6,16 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
     <script src="/js/deseret.js"></script>
 
+
+    <!-- app icon -->
+    <link rel="icon" sizes="192x192" href="images/apple-touch-icon-precomposed.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-precomposed.png">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
     <!-- Facebook metadata -->
     <meta property="og:title" content="Deseret Alphabet Translator"/>
     <meta property="og:url" content="http://2deseret.com"/>
@@ -69,6 +79,7 @@
         	<div class="row">
           	<div class="col-md-2"></div>
           	<div class="col-md-8 center-block text-center">
+              <img id="beehive-img" src="/images/fading-beehive.png"/>
               <h1>Deseret Alphabet Translator</h1>
             </div>
           </div>
@@ -90,11 +101,13 @@
             <div class="col-md-8 center-block text-center">
 
               <form>
-                <div><textarea ng-model="english" ng-init="english='{{ english }}'" id="input_well" name="input_text" class="form-control" rows="8" placeholder="Type English to translate here." autofocus></textarea></div>
-                <button id="translate_button" type="submit" ng-click="translate()" class="btn btn-info" value="Translate"><span class="glyphicon glyphicon-circle-arrow-down"></span> Translate </button>
-              </form>
+                <div><textarea ng-model="english" ng-init="english='{{ english }}'" id="input_well" name="input_text" class="form-control" rows="8" placeholder="Type English to translate here." autofocus ng-keyup="translate()"> </textarea></div>
 
-              <textarea ng-bind-html="deseret" ng-init="deseret='{{ deseret }}'" id="output_well" class="form-control" rows="10">{{deseret}}</textarea>
+                <button id="translate_button" type="submit" ng-click="translate()" class="btn btn-info" value="Translate"><span class="glyphicon glyphicon-circle-arrow-down"></span> Translate </button>
+
+                <textarea ng-bind-html="deseret" ng-init="deseret='{{ deseret }}'" id="output_well" class="form-control" rows="10">{{deseret}}</textarea>
+
+              </form>
 
               <!-- Facebook and Google+ buttons -->
               <div class="social-buttons">

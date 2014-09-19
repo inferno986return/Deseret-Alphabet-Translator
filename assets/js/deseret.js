@@ -16,6 +16,7 @@ app.controller("TranslationController", ['$scope', '$http', '$sce', function($sc
 			$scope.status = status;
 			$scope.data = data;
 			$scope.deseret = $sce.trustAsHtml(data.deseret); // Show result from server in our <pre></pre> element
+			document.getElementById("input_well").focus()
 		})
 		.
 		error(function(data, status) {
@@ -24,3 +25,17 @@ app.controller("TranslationController", ['$scope', '$http', '$sce', function($sc
 		});
 	};
 }])
+
+app.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
