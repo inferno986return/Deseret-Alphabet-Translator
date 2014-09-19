@@ -30,17 +30,17 @@ class MainPage(webapp2.RequestHandler):
     def post(self):
         d = get_global_deseret()
 
-        text = self.request.get('english')
+        english = self.request.params.get('english')
 
-        #print "text = %s" % text
-        if text:
-            deseret_text = d.translate(text)
+        #print "english = %s" % english
+        if english:
+            deseret = d.translate(english)
         else:
-            deseret_text = ""
+            deseret = ""
 
         template_values = {
-            "english": text,
-            "deseret": deseret_text
+            "english": english,
+            "deseret": deseret
         }
 
         template = JINJA_ENVIRONMENT.get_template('index.html')
