@@ -68,8 +68,9 @@ a:hover {
 	font-size: 14px;
 	background-color: #f0eedb;
 	font-size: 18px;
-	color: #444;
+	color: #000;
 	font-family: "AdamicBee";
+	margin-top:  12px;
 }
 
 #input_well {
