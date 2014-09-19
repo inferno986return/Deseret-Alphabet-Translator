@@ -30,7 +30,7 @@ class MainPage(webapp2.RequestHandler):
     def post(self):
         d = get_global_deseret()
 
-        text = self.request.get('input_text')
+        text = self.request.get('english')
 
         #print "text = %s" % text
         if text:
@@ -39,8 +39,8 @@ class MainPage(webapp2.RequestHandler):
             deseret_text = ""
 
         template_values = {
-            "input_text": text,
-            "output_text": deseret_text
+            "english": text,
+            "deseret": deseret_text
         }
 
         template = JINJA_ENVIRONMENT.get_template('index.html')
@@ -49,6 +49,7 @@ class MainPage(webapp2.RequestHandler):
 
     def get(self):
         self.post()
+
 
 class WarmupHandler(webapp2.RequestHandler):
 
@@ -61,13 +62,8 @@ class JsonHandler(webapp2.RequestHandler):
 
     def post(self):
 
-        print "In JsonHandler"
-        print "body = %s" % self.request.body
         json_obj = json.decode(self.request.body)
-
-        print "json_obj = %s" % json_obj
         english = json_obj['english']
-        print "english = %s" % english
 
         d = get_global_deseret()
         deseret = d.translate(english)
