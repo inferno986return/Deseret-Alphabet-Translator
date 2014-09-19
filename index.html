@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 {% autoescape false %}
-<html lang="en" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope itemtype="http://schema.org/Article">
+<html ng-app="DeseretTranslatorApp" id="ng-app" lang="en" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope itemtype="http://schema.org/Article">
   <head>
+    <!-- Angular.js -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+    <script src="/js/deseret.js"></script>
+
     <!-- Facebook metadata -->
     <meta property="og:title" content="Deseret Alphabet Translator"/>
     <meta property="og:url" content="http://2deseret.com"/>
@@ -19,6 +23,7 @@
     <!-- +1 button: Place this tag in your head or just before your close body tag. -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- End Google+ -->
+
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,79 +51,81 @@
   	<link rel="stylesheet" type="text/css" href="css/deseret.css">
 
   </head>
-  <body role="document">
-    <div id="fb-root"></div>
+  <body ng-app="DeseretTranslatorApp" role="document">
+    <div ng-controller="TranslationController">
+      <div id="fb-root"></div>
 
-      <!-- Facebook Like -->
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <!-- end Facebook like -->
+        <!-- Facebook Like -->
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+      <!-- end Facebook like -->
 
-    	<div class="container-fluid" role="main">
-      	<div class="row">
-        	<div class="col-md-2"></div>
-        	<div class="col-md-8 center-block text-center">
-            <h1>Deseret Alphabet Translator</h1>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-6 center-block text-center">
-          
-            <div id="brigham-quote">
-
-            The advantages of this alphabet will soon be realized, especially by foreigners. .&nbsp;.&nbsp;.&nbsp;It will also be very advantageous to our children. It will be the means of introducing uniformity in our orthography, and the years that are now required to learn to read and spell can be devoted to other studies.
-            <div><img id="brigham-sig" src="/images/brigham-young.png"/></div>
+      	<div class="container-fluid" role="main">
+        	<div class="row">
+          	<div class="col-md-2"></div>
+          	<div class="col-md-8 center-block text-center">
+              <h1>Deseret Alphabet Translator</h1>
             </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-8 center-block text-center">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 center-block text-center">
+            
+              <div id="brigham-quote">
 
-            <form action="/" method="post">
-              <div><textarea id="input_well" name="input_text" class="form-control" rows="8" placeholder="Enter English text here.">{{ input_text }}</textarea></div>
-              <button id="translate_button" type="submit" class="btn btn-info" value="Translate"><span class="glyphicon glyphicon-circle-arrow-down"></span> Translate </button>
-            </form>
-
-            <textarea id="output_well" class="form-control" rows="10">{{ output_text }}</textarea>
-
-            <!-- Facebook and Google+ buttons -->
-            <div class="social-buttons">
-              <div class="fb-like" data-href="http://2deseret.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-              <div class="g-plusone-container"><div class="g-plusone" data-href="http://2deseret.com"></div></div>
+              The advantages of this alphabet will soon be realized, especially by foreigners. .&nbsp;.&nbsp;.&nbsp;It will also be very advantageous to our children. It will be the means of introducing uniformity in our orthography, and the years that are now required to learn to read and spell can be devoted to other studies.
+              <div><img id="brigham-sig" src="/images/brigham-young.png"/></div>
+              </div>
             </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 center-block text-center">
+
+              <form>
+                <div><textarea ng-model="english" id="input_well" name="input_text" class="form-control" rows="8" placeholder="Enter English text here.">{{ input_text }}</textarea></div>
+                <button id="translate_button" type="submit" ng-click="translate()" class="btn btn-info" value="Translate"><span class="glyphicon glyphicon-circle-arrow-down"></span> Translate </button>
+              </form>
+
+              <textarea ng-bind-html="deseret" id="output_well" class="form-control" rows="10"></textarea>
+
+              <!-- Facebook and Google+ buttons -->
+              <div class="social-buttons">
+                <div class="fb-like" data-href="http://2deseret.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                <span class="g-plusone-container"><div class="g-plusone" data-size="medium" data-href="http://2deseret.com"></div></span>
+              </div>
 
 
-            <div class="help-links">
-        	    <div class="help-link"><b>More Deseret Alphabet</b></div>
+              <div class="help-links">
+          	    <div class="help-link"><b>More Deseret Alphabet</b></div>
 
-              <div class="help-link"><a title="Wikipedia entry about the Deseret Alphabet" href="//en.wikipedia.org/wiki/Deseret_alphabet">Wikipedia</a></div>
-        	    <div class="help-link"><a title='"The Deseret Alphabet Experiment," by Richard G. Moore' href="http://rsc.byu.edu/archived/volume-7-number-3-2006/deseret-alphabet-experiment">The Deseret Alphabet Experiment</a></div>
-              <div class="help-link"><a title="DeseretAlphabet.org" href="http://www.deseretalphabet.org">DeseretAlphabet.org</a></div>
-        	    <div class="help-link"><a title="xkcd Deseret Alphabet Edition" href="http://www.deseretalphabet.info/XKCD/">xkcd Deseret Alphabet Edition</a></div>
-              <div class="help-link"><a title="A Complete Guide to Reading and Writing the Deseret Alphabet" href="http://copper.chem.ucla.edu/~jericks/Historical%20or%20Technical/Linguistics/Deseret_Guide.pdf">A Complete Guide to Reading and Writing the Deseret Alphabet</a></div>
-              <div class="help-link"><a title="Writing in the Deseret Alphabet (with Web Fonts)" href="http://elliotec.com/writing-in-the-deseret-alphabet/">Writing in the Deseret Alphabet (with Web Fonts)</a></div>
-              <br/>
-              <div class="help-link">Pronunciation data provided by the <a href="//en.wikipedia.org/wiki/Moby_Project#Pronunciator">Moby Project</a>.</div>
-        	 </div>
+                <div class="help-link"><a title="Wikipedia entry about the Deseret Alphabet" href="//en.wikipedia.org/wiki/Deseret_alphabet">Wikipedia</a></div>
+          	    <div class="help-link"><a title='"The Deseret Alphabet Experiment," by Richard G. Moore' href="http://rsc.byu.edu/archived/volume-7-number-3-2006/deseret-alphabet-experiment">The Deseret Alphabet Experiment</a></div>
+                <div class="help-link"><a title="DeseretAlphabet.org" href="http://www.deseretalphabet.org">DeseretAlphabet.org</a></div>
+          	    <div class="help-link"><a title="xkcd Deseret Alphabet Edition" href="http://www.deseretalphabet.info/XKCD/">xkcd Deseret Alphabet Edition</a></div>
+                <div class="help-link"><a title="A Complete Guide to Reading and Writing the Deseret Alphabet" href="http://copper.chem.ucla.edu/~jericks/Historical%20or%20Technical/Linguistics/Deseret_Guide.pdf">A Complete Guide to Reading and Writing the Deseret Alphabet</a></div>
+                <div class="help-link"><a title="Writing in the Deseret Alphabet (with Web Fonts)" href="http://elliotec.com/writing-in-the-deseret-alphabet/">Writing in the Deseret Alphabet (with Web Fonts)</a></div>
+                <br/>
+                <div class="help-link">Pronunciation data provided by the <a href="//en.wikipedia.org/wiki/Moby_Project#Pronunciator">Moby Project</a>.</div>
+          	 </div>
 
-            <div class="copyright">Created by Nathan Hadfield<br/>Questions or comments? <a href="//bitbucket.org/twistedroot/deseret-alphabet-translator/issues">I'd love to hear from you.</a></div>
+              <div class="copyright">Created by Nathan Hadfield<br/>Questions or comments? <a href="//bitbucket.org/twistedroot/deseret-alphabet-translator/issues">I'd love to hear from you.</a></div>
 
-        	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  	
-        	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+          	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  	
+          	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-        </div>
+          </div>
+      	</div>
+
     	</div>
-
-  	</div>
+    </div>  <!-- end ng-controller -->
   </body>
 </html>
 {% endautoescape %}
