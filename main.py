@@ -1,40 +1,46 @@
 import os
 import urllib
-#import logging
+import logging
 
 import jinja2
 import webapp2
 from webapp2_extras import json
 
-from deseret import Deseret
+from english_to_deseret import EnglishToDeseret
+from deseret_to_english import DeseretToEnglish
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-def get_global_deseret():
+
+def get_globals():
 
     app = webapp2.get_app()
-    d = app.registry.get('deseret')
-    if not d:
+    d2e = app.registry.get('d2e')
+    e2d = app.registry.get('e2d')
+    if not d2e:
         print "Globals were not initialized. Initializing now..."
-        d = Deseret()
-        app.registry['deseret'] = d
+        e2d = EnglishToDeseret()
+        app.registry['e2d'] = e2d
+        d2e = DeseretToEnglish()
+        app.registry['d2e'] = d2e
 
-    return d
+    return {'d2e': d2e, 'e2d':e2d}
 
 
 class MainPage(webapp2.RequestHandler):
 
     def post(self):
-        d = get_global_deseret()
+        g = get_globals()
 
+        d2e = g['d2e'];
         english = self.request.params.get('english')
 
         #print "english = %s" % english
         if english:
-            deseret = d.translate(english)
+            deseret = d2e.translate(english)
         else:
             english = ""
             deseret = ""
@@ -56,7 +62,7 @@ class WarmupHandler(webapp2.RequestHandler):
 
     def get(self):
         print "Warming up..."
-        get_global_deseret()
+        get_globals()
         self.response.write("All warmed up!")
 
 class JsonHandler(webapp2.RequestHandler):
@@ -64,15 +70,32 @@ class JsonHandler(webapp2.RequestHandler):
     def post(self):
 
         json_obj = json.decode(self.request.body)
-        english = json_obj['english']
+        english = json_obj.get('english', None)
+        g = get_globals()
+        self.response.content_type = 'application/json; charset=utf-8'
 
-        d = get_global_deseret()
-        deseret = d.translate(english)
-        self.response.content_type = 'application/json'
-        obj = {
-            'deseret': deseret
-        } 
-        self.response.write(json.encode(obj))
+        if english:
+            e2d = g['e2d']
+            logging.warn("Translating '%s'..." % english)
+            deseret = e2d.translate(english)
+            logging.warn("Translation: '%s'" % deseret)
+            obj = {
+                'deseret': deseret
+            }
+            self.response.write(json.encode(obj))
+
+        else:
+            deseret = json_obj.get('deseret', None)
+            if deseret:
+                d2e = g['d2e']
+                english = d2e.translate(deseret)
+                obj = {
+                    'english': english
+                }
+                self.response.write(json.encode(obj))
+            else:
+                self.abort(500, detail="Either 'english' or 'deseret' parameter must be provided.")
+
 
 
 def handle_error(request, response, exception):

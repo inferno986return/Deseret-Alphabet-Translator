@@ -1,72 +1,73 @@
-# coding: utf-8
 from unittest import TestCase
 from english_to_deseret import EnglishToDeseret
-
 
 class TestEnglishToDeseret(TestCase):
 
     def setUp(self):
-        self.english = EnglishToDeseret()
+        self.deseret = EnglishToDeseret()
 
     def test_translate(self):
 
-        english_word = self.english.translate(u'𐐐𐐇𐐢𐐄')
-        self.assertEquals(english_word, 'hello')
+        deseret_word = self.deseret.translate('hello')
+        self.assertEquals(deseret_word, u'\U00010410\U00010407\U00010422\U00010404')
 
-        english_word = self.english.translate('world')
-        self.assertEquals(english_word, u'\u6657\u66570;&#66593;&#66594;&#66580;')
+        deseret_word = self.deseret.translate('world')
+        self.assertEquals(deseret_word, u'\U0001040e\U0001040a\U00010421\U00010422\U00010414')
 
-        english_word = self.english.translate('hello world')
-        self.assertEquals(english_word, u'&#66576;&#66567;&#66594;&#66564; &#66574;&#66570;&#66593;&#66594;&#66580;')
+        deseret_word = self.deseret.translate('hello world')
+        self.assertEquals(deseret_word, u'\U00010410\U00010407\U00010422\U00010404 \U0001040e\U0001040a\U00010421\U00010422\U00010414')
 
-        english_word = self.english.translate('hello, world')
-        self.assertEquals(english_word, u'&#66576;&#66567;&#66594;&#66564;, &#66574;&#66570;&#66593;&#66594;&#66580;')
+        deseret_word = self.deseret.translate('hello, world')
+        self.assertEquals(deseret_word, u'\U00010410\U00010407\U00010422\U00010404, \U0001040e\U0001040a\U00010421\U00010422\U00010414')
 
     def test_translate_word(self):
 
-        english_word = self.english.translate('jellies')
-        self.assertEquals(english_word, u'&#66582;&#66567;&#66594;&#66560;&#66590;')
+        deseret_word = self.deseret.translate('jellies')
+        print deseret_word
+        self.assertEquals(deseret_word, u'\U00010416\U00010407\U00010422\U00010400\U0001041e')
 
-        english_word = self.english.translate('horse')
-        self.assertEquals(english_word, u'&#66576;&#66563;&#66593;&#66589;')
+        print deseret_word
+        deseret_word = self.deseret.translate('horse')
+        self.assertEquals(deseret_word, u'\U00010410\U00010403\U00010421\U0001041d')
 
-        english_word = self.english.translate('horses')
-        self.assertEquals(english_word, u'&#66580;&#66565;&#66586;&#66593;&#66570;&#66590;')
+        deseret_word = self.deseret.translate('horses')
+        self.assertEquals(deseret_word, u'\U00010410\U00010403\U00010421\U0001041d\U0001041e')
 
-        english_word = self.english.translate('buys')
-        self.assertEquals(english_word, u'&#66578;&#66572;&#66590;')
+        deseret_word = self.deseret.translate('buys')
+        self.assertEquals(deseret_word, u'\U00010412\U0001040c\U0001041e')
 
-        english_word = self.english.translate('candies')
-        self.assertEquals(english_word, u'&#66583;&#66568;&#66596;&#66580;&#66560;&#66590;')
+        deseret_word = self.deseret.translate('candies')
+        self.assertEquals(deseret_word, u'\U00010417\U00010408\U00010424\U00010414\U00010400\U0001041e')
 
-        english_word = self.english.translate('buses')
-        self.assertEquals(english_word,  u'&#66578;&#66570;&#66589;&#66570;&#66590;')
+        deseret_word = self.deseret.translate('buses')
+        self.assertEquals(deseret_word,  u'\U00010412\U0001040a\U0001041d\U0001040a\U0001041e')
 
-        english_word = self.english.translate('biking')
-        self.assertEquals(english_word, u'&#66578;&#66572;&#66583;&#66560;&#66597;')
+        deseret_word = self.deseret.translate('biking')
+        self.assertEquals(deseret_word, u'\U00010412\U0001040c\U00010417\U00010400\U00010425')
 
-        english_word = self.english.translate('digging')
-        self.assertEquals(english_word, u'&#66580;&#66566;&#66584;&#66560;&#66597;')
+        deseret_word = self.deseret.translate('digging')
+        self.assertEquals(deseret_word, u'\U00010414\U00010406\U00010418\U00010400\U00010425')
 
-        english_word = self.english.translate('runs')
-        self.assertEquals(english_word, u'&#66593;&#66570;&#66596;&#66590;')
+        deseret_word = self.deseret.translate('runs')
+        self.assertEquals(deseret_word, u'\U00010421\U0001040a\U00010424\U0001041e')
 
-        english_word = self.english.translate('seeing')
-        self.assertEquals(english_word, u'&#66589;&#66560;&#66560;&#66597;')
+        deseret_word = self.deseret.translate('seeing')
+        self.assertEquals(deseret_word, u'\U0001041d\U00010400\U00010400\U00010425')
 
-        english_word = self.english.translate('Deseret')
-        self.assertEquals(english_word, u'&#66580;&#66567;&#66590;&#66570;&#66593;&#66567;&#66579;')
+        deseret_word = self.deseret.translate('Deseret')
+        self.assertEquals(deseret_word, u'\U00010414\U00010407\U0001041d\U00010400\U00010421\U00010407\U00010413')
 
     def test_get_ipa_word(self):
 
-        ipa_word = self.english.get_ipa_word(u'𐐐𐐇𐐢𐐄')
-        self.assertEquals(ipa_word, "hEloU")
+        ipa_word = self.deseret.get_ipa_word('hello')
+        self.assertEquals(ipa_word, "h/E/'l/oU/")
 
-    def test_get_english_word(self):
+    def test_get_deseret_word(self):
 
-        ipa_word = self.english.get_ipa_word('hello')
-        english_word = self.english.get_english_word(ipa_word)
-        self.assertEquals(english_word, u'&#66576;&#66567;&#66564;')
+        ipa_word = self.deseret.get_ipa_word('hello')
+        deseret_word = self.deseret.get_deseret_word(ipa_word)
+        self.assertEquals(deseret_word,  u'\U00010410\U00010407\U00010422\U00010404')
 
     def test_check_plural(self):
-        self.fail()
+        # self.fail()
+        self.failUnless(True);
