@@ -1,4 +1,5 @@
 /* @override http://2deseret.com/css/deseret.css */
+/* @override http://localhost:8080/css/deseret.css */
 
 #keyboard {
 	margin-top: 4px;
@@ -6,8 +7,7 @@
 
 .deseret-key {
 	display: inline-block;
-	border: 1px solid #b4b39b;
-	border-color: #c5c4a9;
+	border: 1px solid #c4c3a8;
 	height: 40px;
 	line-height: 40px;
 	width: 40px;
@@ -44,13 +44,24 @@
 }
 
 #deseret-key-space {
-	width: 50%;
+	width: 65%;
 }
 
 #deseret-key-backspace {
 	font-family:  'IM Fell English', serif;
 	font-style: italic;
-	width: 60px;	
+	width: 60px;
+	vertical-align: top;
+}
+
+#keyboard-letters {
+	display: inline-block;
+	width: 80%;
+}
+
+#keyboard-delete-column {
+	display: inline-block;
+	vertical-align: top;
 }
 
 html, body {
