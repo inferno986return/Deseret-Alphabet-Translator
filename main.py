@@ -21,7 +21,7 @@ def get_globals():
     d2e = app.registry.get('d2e')
     e2d = app.registry.get('e2d')
     if not d2e:
-        print "Globals were not initialized. Initializing now..."
+        logging.info("Globals were not initialized. Initializing now...")
         e2d = EnglishToDeseret()
         app.registry['e2d'] = e2d
         d2e = DeseretToEnglish()
@@ -61,7 +61,7 @@ class MainPage(webapp2.RequestHandler):
 class WarmupHandler(webapp2.RequestHandler):
 
     def get(self):
-        print "Warming up..."
+        logging.info("Warming up...")
         get_globals()
         self.response.write("All warmed up!")
 
@@ -74,11 +74,11 @@ class JsonHandler(webapp2.RequestHandler):
         g = get_globals()
         self.response.content_type = 'application/json; charset=utf-8'
 
-        if english:
+        if not english is None:
             e2d = g['e2d']
-            logging.warn("Translating '%s'..." % english)
+            logging.info("Translating '%s'..." % english)
             deseret = e2d.translate(english)
-            logging.warn("Translation: '%s'" % deseret)
+            logging.info("Translation: '%s'" % deseret)
             obj = {
                 'deseret': deseret
             }
@@ -86,7 +86,7 @@ class JsonHandler(webapp2.RequestHandler):
 
         else:
             deseret = json_obj.get('deseret', None)
-            if deseret:
+            if not deseret is None:
                 d2e = g['d2e']
                 english = d2e.translate(deseret)
                 obj = {

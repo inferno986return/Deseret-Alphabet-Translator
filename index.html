@@ -101,12 +101,17 @@
             <div class="col-md-8 center-block text-center">
 
               <form>
-                <div><textarea ng-model="english" ng-init="english='{{ english }}'" id="input_well" name="input_text" class="form-control" rows="4" placeholder="Type English to translate here, or paste Deseret Alphabet (as Unicode) below." autofocus ng-keyup="englishToDeseret()">{{english}}</textarea></div>
+                <div>
+                <h3>English</h3>
+                <textarea ng-model="english" ng-init="english='{{ english }}'" id="input_well" name="input_text" class="form-control" rows="4" placeholder="Type English here, or Deseret Alphabet below." autofocus ng-keyup="englishToDeseret()">{{english}}</textarea></div>
 
                 <!-- <button id="translate_button" type="submit" ng-click="translate()" class="btn btn-info" value="Translate"><span class="glyphicon glyphicon-circle-arrow-down"></span> Translate </button> -->
 
+                <h3>Deseret Alphabet</h3>
                 <textarea ng-model="deseret" ng-init="deseret='{{ deseret }}'" id="output_well" class="form-control" rows="6" ng-keyup="deseretToEnglish()">{{deseret}}</textarea>
 
+                <div id="keyboard">
+                </div>
               </form>
 
               <!-- Facebook and Google+ buttons -->
@@ -133,6 +138,8 @@
 
           	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  	
           	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+            <script src="/js/keyboard.js"></script>
 
           </div>
       	</div>

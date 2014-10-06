@@ -17,6 +17,9 @@ class EnglishToDeseret:
                 unicode_value = ("\\U%08x" % int(value)).decode('unicode-escape')
                 self.ipa_to_deseret[key] = unicode_value
             json_file.close()
+            # IPA doesn't distinguish between &#66562; ("a" in "far") and &#66569; ("o" in "bob"),
+            # so the JSON map has two entries with the same key and we lose the mapping from &#66562; to IPA "A"
+            self.ipa_to_deseret[u'A'] = ("\\U%08x" % 66562).decode('unicode-escape')         # Use &#66562; instead of &#66569;
 
         print(self.ipa_to_deseret)
         # print(self.ipa_to_deseret["@"])
