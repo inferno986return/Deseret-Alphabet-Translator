@@ -29,6 +29,7 @@
     -ms-user-select: none;
     user-select: none;
 
+	cursor: pointer;
 }
 
 .deseret-key:hover {
