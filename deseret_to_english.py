@@ -132,16 +132,17 @@ class DeseretToEnglish:
 
         ipa_word = self.get_ipa_word(deseret_word)
         if not ipa_word:
-            logging.error("ERROR: Could not get IPA word for %s" % deseret_word)
+            #logging.error("ERROR: Could not get IPA word for %s" % deseret_word)
+            pass
         else:
-            logging.info("...IPA word: '%s'" % ipa_word.encode('utf-8'))
+            #logging.info("...IPA word: '%s'" % ipa_word.encode('utf-8'))
             english_word = self.get_english_word(ipa_word)
             if english_word:
                 translation = english_word
-                logging.info("...Translation: '%s'" % english_word.encode('utf-8'))
+                #logging.info("...Translation: '%s'" % english_word.encode('utf-8'))
             else:
                 translation = self.get_ipa_word(deseret_word, dividers=True, english_phonetic=True)
-                logging.info("No translation found for '%s'; returning phonetic '%s'" % (deseret_word.encode('utf-8'), translation.encode('utf-8')))
+                #logging.info("No translation found for '%s'; returning phonetic '%s'" % (deseret_word.encode('utf-8'), translation.encode('utf-8')))
 
         return translation
 

@@ -1,5 +1,4 @@
 import os
-import urllib
 import logging
 
 import jinja2
@@ -8,6 +7,8 @@ from webapp2_extras import json
 
 from english_to_deseret import EnglishToDeseret
 from deseret_to_english import DeseretToEnglish
+
+logging.getLogger().setLevel(logging.ERROR)
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -76,9 +77,9 @@ class JsonHandler(webapp2.RequestHandler):
 
         if not english is None:
             e2d = g['e2d']
-            logging.info("Translating '%s'..." % english)
+            #logging.info("Translating '%s'..." % english)
             deseret = e2d.translate(english)
-            logging.info("Translation: '%s'" % deseret)
+            #logging.info("Translation: '%s'" % deseret)
             obj = {
                 'deseret': deseret
             }
@@ -128,3 +129,5 @@ application = webapp2.WSGIApplication([
 application.error_handlers[404] = handle_error
 application.error_handlers[400] = handle_error
 application.error_handlers[500] = handle_error
+
+
