@@ -36,7 +36,8 @@
 
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
   	<title>Deseret Alphabet Translator</title>
     <meta name="description" content="English to Deseret Alphabet translator"/>
     <meta name="keywords" content="deseret alphabet, translator, phonetic, alphabets, deseret, mormon, mormons, history, mormon history, brigham young, george watt, lds, honey bee, utah territory"/>
@@ -138,6 +139,9 @@
 
           	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  	
           	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+            <!-- FastClick -- removes 300ms delay on mobile devices -->
+            <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+            $(function() { FastClick.attach(document.body); });
 
             <script src="/js/keyboard.js"></script>
 
