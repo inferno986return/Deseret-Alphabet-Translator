@@ -76,7 +76,11 @@ var html = '<div id="keyboard-letters">';
 for (i=66560; i <= 66598; ++i) {
 	var keyName = "deseret-key-" + i;
 	html += '<div id="' + keyName + '" class="deseret-key" title="' + i + '">&#' + i + ';</div>';
-}	
+}
+html += '<div id="deseret-key-period" class="deseret-key">,</div>';
+html += '<div id="deseret-key-period" class="deseret-key">.</div>';
+html += '<div id="deseret-key-period" class="deseret-key">?</div>';
+html += '<div id="deseret-key-period" class="deseret-key">!</div>';
 html += '<div id="keyboard-bottom-row"></div><div id="deseret-key-space" class="deseret-key" title="Space">&nbsp;</div>';
 html += '</div><div id="keyboard-delete-column"><div id="deseret-key-backspace" class="deseret-key" title="Backspace">Delete</div></div>';
 keyboard.html(html);
