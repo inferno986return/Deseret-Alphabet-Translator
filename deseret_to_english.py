@@ -124,11 +124,11 @@ class DeseretToEnglish:
     def translate_word(self, deseret_word):
 
         if deseret_word is None or re.match(u'^[\W]+$', deseret_word, re.DOTALL | re.UNICODE):
-            logging.debug("Skipping word '%s'" % deseret_word.encode('utf-8'))
+            #logging.debug("Skipping word '%s'" % deseret_word.encode('utf-8'))
             return deseret_word
 
         translation = deseret_word
-        logging.info("Translating '%s'..." % deseret_word.encode('utf-8'))
+        #logging.info("Translating '%s'..." % deseret_word.encode('utf-8'))
 
         ipa_word = self.get_ipa_word(deseret_word)
         if not ipa_word:
