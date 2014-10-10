@@ -9,6 +9,9 @@ class EnglishToDeseret:
     pron_dict = {}
     ipa_to_deseret = {}
 
+    def unicode_char(self, unicode_value):
+        return ("\\U%08x" % unicode_value).decode('unicode-escape')
+
     def __init__(self):
 
         with open("ipa_to_deseret.json", "r") as json_file:
@@ -147,7 +150,10 @@ class EnglishToDeseret:
             deseret_char = self.ipa_to_deseret.get(ipa_syllable, None)
 
             if deseret_char:
-                deseret_word += deseret_char
+                if deseret_char == self.unicode_char(66598):        # use the diphthong "o", "ee" instead of "oy"
+                   deseret_word += self.unicode_char(66564) + self.unicode_char(66561)
+                else:
+                    deseret_word += deseret_char
             else:
                 # no match for full syllable; process as a cluster of consonants
                 for ipa_char in ipa_syllable:

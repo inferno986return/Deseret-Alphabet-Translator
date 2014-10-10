@@ -63,6 +63,12 @@ class DeseretToEnglish:
             self.deseret_to_ipa[self.unicode_char(66562)] = [u'A']
             self.ipa_to_deseret[u'A'] = self.unicode_char(66562)         # Use &#66562; instead of &#66569;
 
+            # Add support for phonetic translation of "ew" ["YU"] (&#66599); but use "oo" (&#66565;) when going from English > Deseret
+            self.deseret_to_ipa[self.unicode_char(66599)] = [u'ju']
+            # Add support for phonetic translation of "oi" ["OY"] (&#66598); but use "o","ee" when going from English > Deseret
+            self.deseret_to_ipa[self.unicode_char(66598)] = [u'Oi']
+
+
         logging.info( "deseret_to_ipa:")
         for deseret_char, ipa_charset in self.deseret_to_ipa.items():
             logging.info("'%s': '%s'" % (deseret_char.encode("utf-8"), ipa_charset))
@@ -282,6 +288,10 @@ class DeseretToEnglish:
         # remove apostrophes in contractions
         deseret_word = re.sub('[\',\\.]', '', deseret_word)
 
+        # convert "o""e" to Oi
+        oe_diphthong = self.unicode_char(66564) + self.unicode_char(66561)
+        if oe_diphthong in deseret_word:
+            deseret_word = deseret_word.replace(oe_diphthong, self.unicode_char(66598))
 
         ipa_word = ''
         for deseret_letter in deseret_word:

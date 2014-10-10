@@ -73,7 +73,7 @@ backspaceAtCaret: function(){
 keyboard = $('#keyboard');
 
 var html = '<div id="keyboard-letters">';
-for (i=66560; i <= 66598; ++i) {
+for (i=66560; i <= 66599; ++i) {
 	var keyName = "deseret-key-" + i;
 	html += '<div id="' + keyName + '" class="deseret-key" title="' + i + '">&#' + i + ';</div>';
 }
@@ -104,7 +104,7 @@ $('.deseret-key').click(function() {
 });
 
 $.getJSON("/js/deseret_names.json", function(json) {
-    for(i=66560; i <=66598; ++i) {
+    for(i=66560; i <=66599; ++i) {
         var keyId = "#deseret-key-" + i;
         var letterName = json[i.toString()];
         //$(keyId).title = letterName;
