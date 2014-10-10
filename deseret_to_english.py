@@ -4,6 +4,7 @@ import re
 import htmlentitydefs
 import sys
 import logging
+import deseret_strings
 
 class DeseretToEnglish:
 
@@ -127,7 +128,9 @@ class DeseretToEnglish:
 
         return translation.strip()
 
-    def translate_word(self, deseret_word):
+    def translate_word(self, source_word):
+
+        deseret_word = source_word.upper()
 
         if deseret_word is None or re.match(u'^[\W]+$', deseret_word, re.DOTALL | re.UNICODE):
             #logging.debug("Skipping word '%s'" % deseret_word.encode('utf-8'))
@@ -150,7 +153,7 @@ class DeseretToEnglish:
                 translation = self.get_ipa_word(deseret_word, dividers=True, english_phonetic=True)
                 #logging.info("No translation found for '%s'; returning phonetic '%s'" % (deseret_word.encode('utf-8'), translation.encode('utf-8')))
 
-        return translation
+        return deseret_strings.apply_capitalization(source_word, translation)
 
     def ipa_char_for_deseret_char(self, deseret_char):
         ipa_char = None

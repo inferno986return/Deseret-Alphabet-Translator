@@ -1,6 +1,7 @@
 import json
 import re
 import logging
+import deseret_strings
 
 logger = logging.getLogger()
 
@@ -45,9 +46,11 @@ class EnglishToDeseret:
 
         return translation.strip()
 
-    def translate_word(self, english_word):
+    def translate_word(self, source_word):
 
         translation = ""
+
+        english_word = source_word.upper()
 
         ipa_word = self.get_ipa_word(english_word)
         if ipa_word:
@@ -59,7 +62,7 @@ class EnglishToDeseret:
             else:
                 translation += english_word
 
-        return translation
+        return deseret_strings.apply_capitalization(source_word, translation)
 
     def try_alternate_endings(self, english_word):
         """Get string of IPA fragments that can be converted into EnglishToDeseret Alphabet characters"""
