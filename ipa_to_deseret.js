@@ -50,6 +50,7 @@
 	"m":	"66595",	/* sounds like the "m" in "aim" */
     "n":	"66596",	/* sounds like the "n" in "and" */
 	"N":	"66597",	/* sounds like the "ng" in "bang" */
-	"Oi":	"66598"	    /* sounds like the "oi" in "oil" */
+	"Oi":	"66598",	/* sounds like the "oi" in "oil" */       // later removed
+//  "u":    "66599",    /* sounds like the "ew" in "drew" */      // not sure how this differs from 66565
 }
 
