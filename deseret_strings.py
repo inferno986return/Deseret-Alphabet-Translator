@@ -31,16 +31,19 @@ def unicode_char(unicode_value):
 
 def is_leading_upper(text):
     found_trailing_lower = False
-    if text[0].isupper():
-        for letter in text[1:]:
-            if not letter.isupper():
-                found_trailing_lower = True
-                break
+    if len(text) > 0 and text[0].isupper():
+        if len(text) == 1:
+            found_trailing_lower = True
+        else:
+            for letter in text[1:]:
+                if not letter.isupper():
+                    found_trailing_lower = True
+                    break
 
     return found_trailing_lower
 
 def is_all_upper(text):
-    return text.isupper()
+    return len(text) > 1 and text.isupper()
 
 def leading_upper(text):
     """Convert text to leading capitalization"""
@@ -51,10 +54,10 @@ def apply_capitalization(source, target):
     if not source or source is None:
         text = source
     else:
-        if source.isupper():
-            text = target.upper()
-        elif is_leading_upper(source):
+        if is_leading_upper(source):
             text = leading_upper(target)
+        elif source.isupper():
+            text = target.upper()
         else:
             text = target.lower()
 
