@@ -75,18 +75,23 @@ keyboard = $('#keyboard');
 var html = '<div id="keyboard-letters">';
 for (i=66560; i <= 66599; ++i) {
 	var keyName = "deseret-key-" + i;
-	html += '<div id="' + keyName + '" class="deseret-key" title="' + i + '">&#' + i + ';</div>';
+	html += '<div id="' + keyName + '" class="deseret-key" title="' + i + '"><div class="deseret-char">&#' + i + ';</div><div class="keyboard-char"></div></div>';
 }
-html += '<div id="deseret-key-period" class="deseret-key">,</div>';
-html += '<div id="deseret-key-period" class="deseret-key">.</div>';
-html += '<div id="deseret-key-period" class="deseret-key">?</div>';
-html += '<div id="deseret-key-period" class="deseret-key">!</div>';
-html += '<div id="keyboard-bottom-row"></div><div id="deseret-key-space" class="deseret-key" title="Space">&nbsp;</div>';
+html += '<div id="deseret-key-comma" class="deseret-key"><div class="deseret-char">,</div></div>';
+html += '<div id="deseret-key-period" class="deseret-key"><div class="deseret-char">.</div></div>';
+html += '<div id="deseret-key-question" class="deseret-key"><div class="deseret-char">?</div></div>';
+html += '<div id="deseret-key-bang" class="deseret-key">!</div>';
+html += '<div id="keyboard-bottom-row"></div><div id="deseret-key-shift" class="deseret-key" title="Shift">Shift</div>';
+html +=   '<div id="deseret-key-space" class="deseret-key" title="Space"><div class="deseret-char">&nbsp;</div></div>';
 html += '</div><div id="keyboard-delete-column"><div id="deseret-key-backspace" class="deseret-key" title="Backspace">Delete</div></div>';
 keyboard.html(html);
 
 $('.deseret-key').click(function() {
-	if (this.id == 'deseret-key-backspace') {
+    if (this.id=='deseret-key-shift') {
+        $(this).toggleClass('on');
+        update_keyboard();
+    }
+	else if (this.id == 'deseret-key-backspace') {
 		// JavaScript is UCS-2 and doesn't handle wide characters; so to delete 
 		// a Deseret Alphabet Unicode character we actually have to do two deletes.
 		// It would be nice to detect whether the character at the caret is wide or not,
@@ -94,20 +99,49 @@ $('.deseret-key').click(function() {
 		$('#output_well').backspaceAtCaret(); //.backspaceAtCaret();
 	}
 	else {
-		$('#output_well').insertAtCaret(this.innerText);
+        var deseretChar = $(this).children('.deseret-char').text();
+        if( ! $('#deseret-key-shift').hasClass('on') ) {
+            deseretChar = deseretChar.toLowerCase();
+        }
+		$('#output_well').insertAtCaret(deseretChar);
 	}
-  var scope = angular.element($("#output_well")).scope();
-  scope.$apply(function() {
-  	scope.deseret = $('#output_well').val();
-  	scope.deseretToEnglish();
-  });
+
+    var scope = angular.element($("#output_well")).scope();
+    scope.$apply(function() {
+        scope.deseret = $('#output_well').val();
+        scope.deseretToEnglish();
+    });
 });
 
 $.getJSON("/js/deseret_names.json", function(json) {
-    for(i=66560; i <=66599; ++i) {
+    for (i=66560; i <= 66599; ++i) {
         var keyId = "#deseret-key-" + i;
-        var letterName = json[i.toString()];
-        //$(keyId).title = letterName;
-        $(keyId).attr("title", letterName);
+        var keyDef = json[i.toString()];
+        var letterName = keyDef['name'];
+        var keyMap = keyDef['ascii'];
+        var key = $(keyId);
+        key.attr("title", letterName);
+        key.attr("lower-key", keyMap[0]);
+        key.attr("upper-key", keyMap[1])
     }
+    update_keyboard();
 });
+
+function update_keyboard() {
+    var isShiftOn = $('#deseret-key-shift').hasClass('on');
+    for (i=66560; i <= 66599; ++i) {
+        var keyId = "#deseret-key-" + i;
+        var key = $(keyId);
+        var deseretCharDiv = key.children('.deseret-char');
+        var keyboardCharDiv = key.children('.keyboard-char');
+
+        if (isShiftOn) {
+            deseretCharDiv.text(deseretCharDiv.text().toUpperCase());
+            keyboardCharDiv.text(key.attr("upper-key"));
+        }
+        else {
+            deseretCharDiv.text(deseretCharDiv.text().toLowerCase());
+            keyboardCharDiv.text(key.attr("lower-key"));
+        }
+    }
+}

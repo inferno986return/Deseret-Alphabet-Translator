@@ -2,7 +2,7 @@
 /* @override http://localhost:8080/css/deseret.css */
 
 #keyboard {
-	margin-top: 4px;
+	margin-top: 8px;
 }
 
 .deseret-key {
@@ -11,7 +11,7 @@
 	height: 40px;
 	line-height: 40px;
 	width: 40px;
-	margin: 3px 2px;
+	margin: 2px 1px;
 	border-radius:3px;
 	box-shadow: 0 1px 1px #c5c4a9;
 	text-align: center;
@@ -30,6 +30,7 @@
     user-select: none;
 
 	cursor: pointer;
+	position: relative;
 }
 
 .deseret-key:hover {
@@ -40,8 +41,8 @@
 	/*background-color: #efefd7;*/
 	background-color: #e9e8c9;
 	box-shadow: none;
-	margin-top: 4px;
-	margin-bottom: 2px;
+	margin-top: 3px;
+	margin-bottom: 1px;
 }
 
 #deseret-key-space {
@@ -52,7 +53,36 @@
 	font-family:  'IM Fell English', serif;
 	font-style: italic;
 	width: 60px;
-	vertical-align: top;
+}
+
+#deseret-key-shift {
+	font-family: 'IM Fell English', serif;
+	font-style: italic;
+	width: 60px;
+}
+
+#deseret-key-shift.on {
+	background-color: #e9e8c9;
+	box-shadow: none;
+	margin-top: 3px;
+	margin-bottom: 1px;
+}
+
+.deseret-key .deseret-char {
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+
+.deseret-key .keyboard-char {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	display: inline;
+	color: #2695b8;
+	text-shadow: none;
+	line-height: 10px;
+	font-size: 10px;
 }
 
 #keyboard-letters {

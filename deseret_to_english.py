@@ -13,6 +13,7 @@ class DeseretToEnglish:
     ipa_to_deseret = {}
     gsl_word_rankings_dict = {}
     ipa_to_phonetic = {}
+    ascii_to_deseret = {}
 
     @staticmethod
     def unescape(text):
@@ -74,6 +75,14 @@ class DeseretToEnglish:
         for deseret_char, ipa_charset in self.deseret_to_ipa.items():
             logging.info("'%s': '%s'" % (deseret_char.encode("utf-8"), ipa_charset))
 
+        with open("deseret_names.json", "r") as json_file:
+            deseret_names = json.load(json_file)
+            for unicode_id, info in deseret_names.items():
+                if info['ascii']:
+                    self.ascii_to_deseret[info['ascii'][0]] = self.unicode_char(int(unicode_id)).lower()
+                    self.ascii_to_deseret[info['ascii'][1]] = self.unicode_char(int(unicode_id))
+            json_file.close()
+
         with open("ipa_to_phonetic.json", "r") as json_file:
             self.ipa_to_phonetic = json.load(json_file)
 
@@ -85,7 +94,6 @@ class DeseretToEnglish:
                 entry = line.split(" ")
                 # add 1 because if it's in the GSL it's better than not in the GSL, yet some GSL entries have 0s
                 self.gsl_word_rankings_dict[entry[2].strip()] = int(entry[1].strip()) + 1
-
             gsl_file.close()
 
         for pron_filename in ["mobypron.unc", "custompron.unc"]:
@@ -121,6 +129,8 @@ class DeseretToEnglish:
 
     def translate(self, deseret):
 
+        deseret = self.replace_ascii_chars_with_deseret_unicode(deseret)
+
         # print "Translating '%s'" % deseret.encode('utf-8')
         translation = ''
         for deseret_word in re.findall(u'([^\W\d]+|[\W\d]+)', deseret, re.DOTALL | re.UNICODE):
@@ -130,14 +140,14 @@ class DeseretToEnglish:
 
     def translate_word(self, source_word):
 
+        if source_word is None or re.match(u'^[\W]+$', source_word, re.DOTALL | re.UNICODE):
+            logging.warn("Skipping word '%s'" % ('[None]' if source_word is None else source_word.encode('utf-8')))
+            return source_word
+
         deseret_word = source_word.upper()
-
-        if deseret_word is None or re.match(u'^[\W]+$', deseret_word, re.DOTALL | re.UNICODE):
-            #logging.debug("Skipping word '%s'" % deseret_word.encode('utf-8'))
-            return deseret_word
-
         translation = deseret_word
-        #logging.info("Translating '%s'..." % deseret_word.encode('utf-8'))
+
+        logging.warn("Translating '%s'..." % deseret_word.encode('utf-8'))
 
         ipa_word = self.get_ipa_word(deseret_word)
         if not ipa_word:
@@ -399,4 +409,18 @@ class DeseretToEnglish:
         return english_word
 
 
+    def replace_ascii_chars_with_deseret_unicode(self, deseret_word):
+        """
+        AdamicBee font maps ASCII characters to Deseret characters;
+        use the mapping to convert any ASCII characters to actual
+        Deseret Unicode characters
+        """
 
+        if deseret_word is None:
+            value = None
+        else:
+            value = ''
+            for letter in deseret_word:
+                value += self.ascii_to_deseret.get(letter, letter)
+
+        return value
