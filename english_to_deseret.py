@@ -50,7 +50,7 @@ class EnglishToDeseret:
 
         translation = ""
 
-        english_word = source_word.upper()
+        english_word = source_word.lower()
 
         ipa_word = self.get_ipa_word(english_word)
         if ipa_word:
@@ -69,11 +69,6 @@ class EnglishToDeseret:
 
         ipa_word = None
 
-        if not ipa_word and english_word[-1:] == "s":                   # e.g., "runs"
-            ipa_word = self.get_ipa_word(english_word[:-1])
-            if ipa_word:
-                ipa_word += "/z"
-
         if not ipa_word and english_word[-2:] == "es":
             ipa_word = self.get_ipa_word(english_word[:-2])             # e.g., "buses"
             if ipa_word:
@@ -83,10 +78,18 @@ class EnglishToDeseret:
                 if ipa_word:
                     ipa_word += "/z"
 
-        if english_word[-3:] == "ies":
+        if not ipa_word and english_word[-3:] == "ies":
             ipa_word = self.get_ipa_word(english_word[:-3] + "y")       # e.g., "candies"
             if ipa_word:
                 ipa_word += "/z"
+
+        if not ipa_word and english_word[-1:] == "s":                   # e.g., "runs"
+            ipa_word = self.get_ipa_word(english_word[:-1])
+            if ipa_word:
+                if ipa_word[-1] in "tpkqtc":
+                    ipa_word += "/s"
+                else:
+                    ipa_word += "/z"
 
         if not ipa_word and english_word[-3:] == "ing":
             ipa_word = self.get_ipa_word(english_word[:-3])             # e.g., "seeing"
