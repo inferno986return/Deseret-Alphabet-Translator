@@ -8,15 +8,17 @@
 .deseret-key {
 	display: inline-block;
 	border: 1px solid #c4c3a8;
-	height: 40px;
-	line-height: 40px;
-	width: 40px;
+	height: 45px;
+	line-height: 37px;
+	width: 45px;
 	margin: 2px 1px;
+	padding-top: 6px;;
 	border-radius:3px;
 	box-shadow: 0 1px 1px #c5c4a9;
 	text-align: center;
-	vertical-align: top;
+	vertical-align: bottom;
 	font-family: "AdamicBee";
+	font-size: 20px;
 	color:#666;
 	text-shadow: 0 1px 0px #fefee8;
 	background-color: #efefd7;
@@ -49,16 +51,18 @@
 	width: 65%;
 }
 
-#deseret-key-backspace {
+#deseret-key-backspace, #deseret-key-shift {
 	font-family:  'IM Fell English', serif;
 	font-style: italic;
-	width: 60px;
+	font-size: 17px;
+	padding-top: 8px;
 }
 
+#deseret-key-backspace {
+	width: 70px;
+}
 #deseret-key-shift {
-	font-family: 'IM Fell English', serif;
-	font-style: italic;
-	width: 60px;
+	width: 70px;
 }
 
 #deseret-key-shift.on {
@@ -76,13 +80,15 @@
 
 .deseret-key .keyboard-char {
 	position: absolute;
-	top: 4px;
-	left: 4px;
+	top: 5px;
+	left: 5px;
 	display: inline;
-	color: #2695b8;
+	color: rgba(38,149,184,0.6);
 	text-shadow: none;
 	line-height: 10px;
-	font-size: 10px;
+	font-size: 12px;
+	font-family: "Arial", "sans-serif";
+	font-style: normal;
 }
 
 #keyboard-letters {
