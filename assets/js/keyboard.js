@@ -80,7 +80,7 @@ for (i=66560; i <= 66599; ++i) {
 html += '<div id="deseret-key-comma" class="deseret-key"><div class="deseret-char">,</div></div>';
 html += '<div id="deseret-key-period" class="deseret-key"><div class="deseret-char">.</div></div>';
 html += '<div id="deseret-key-question" class="deseret-key"><div class="deseret-char">?</div></div>';
-html += '<div id="deseret-key-bang" class="deseret-key">!</div>';
+html += '<div id="deseret-key-bang" class="deseret-key"><div class="deseret-char">!</div></div>';
 html += '<div id="keyboard-bottom-row"></div><div id="deseret-key-shift" class="deseret-key" title="Shift">Shift</div>';
 html +=   '<div id="deseret-key-space" class="deseret-key" title="Space"><div class="deseret-char">&nbsp;</div></div>';
 html += '</div><div id="keyboard-delete-column"><div id="deseret-key-backspace" class="deseret-key" title="Backspace">Delete</div></div>';
