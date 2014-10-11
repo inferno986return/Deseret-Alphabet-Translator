@@ -141,13 +141,13 @@ class DeseretToEnglish:
     def translate_word(self, source_word):
 
         if source_word is None or re.match(u'^[\W]+$', source_word, re.DOTALL | re.UNICODE):
-            logging.warn("Skipping word '%s'" % ('[None]' if source_word is None else source_word.encode('utf-8')))
+            #logging.warn("Skipping word '%s'" % ('[None]' if source_word is None else source_word.encode('utf-8')))
             return source_word
 
         deseret_word = source_word.upper()
         translation = deseret_word
 
-        logging.warn("Translating '%s'..." % deseret_word.encode('utf-8'))
+        #logging.warn("Translating '%s'..." % deseret_word.encode('utf-8'))
 
         ipa_word = self.get_ipa_word(deseret_word)
         if not ipa_word:

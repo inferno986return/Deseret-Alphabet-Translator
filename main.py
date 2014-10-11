@@ -8,7 +8,7 @@ from webapp2_extras import json
 from english_to_deseret import EnglishToDeseret
 from deseret_to_english import DeseretToEnglish
 
-logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] %(module)s %(funcName)s(): %(message)s')
+#logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] %(module)s %(funcName)s(): %(message)s')
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
