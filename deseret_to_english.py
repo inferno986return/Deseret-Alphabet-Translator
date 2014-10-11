@@ -406,6 +406,11 @@ class DeseretToEnglish:
                 else:                                                   # e.g., "feeder"
                     english_word += "er"
 
+        if not english_word and len(ipa_word) >= 1 and ipa_word[-1] == "s":
+            english_word = self.lookup_ipa(ipa_word[:-1])
+            if english_word:
+                english_word += "s"
+
         return english_word
 
 
