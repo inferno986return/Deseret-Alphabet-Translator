@@ -211,6 +211,14 @@ a:hover {
 	font-style: normal;
 }
 
+.api-link {
+	margin-top: 24px;
+	margin-bottom: 36px;
+}
+.api-link p {
+	margin: 0;
+}
+
 @font-face {
   font-family: 'AdamicBee';
   src: url('/fonts/AdamicBee.eot'); /* IE9 Compat Modes */
@@ -253,4 +261,54 @@ a:hover {
 	width: 160px;
 	height: 33px;
 	display: inline-block;
+}
+
+/* API doc */
+.api-doc #keyboard-screenshot {
+	width: 193px;
+	height: 99px;
+	border: 1px solid #99997f;
+	margin-left: 100px;
+	margin-bottom: 24px;
+}
+
+.api-doc h2 {
+	margin-top: 44px;
+}
+.api-doc h3 {
+	margin-top: 44px;
+	padding-left: 0;
+	margin-bottom: 8px;
+}
+.resource-url, dt {
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.api-doc dl {
+	margin-top: 24px;
+	margin-bottom: 8px;
+}
+.api-doc dt, .api-doc dd {
+	padding-bottom: 0.5em;
+}
+
+.api-doc ul {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.api-doc .social-buttons {
+	margin-top: 60px;
+}
+.api-doc .copyright {
+	margin-top:0;
+}
+
+.api-doc samp pre {
+	color: #745f00;
+}
+
+.api-doc h1 a {
+	color: #444;
 }

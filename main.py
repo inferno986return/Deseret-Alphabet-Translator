@@ -59,6 +59,16 @@ class MainPage(webapp2.RequestHandler):
         self.post()
 
 
+class ApiPage(webapp2.RequestHandler):
+
+    def post(self):
+        template_values = {}
+        template = JINJA_ENVIRONMENT.get_template('api.html')
+        self.response.write(template.render(template_values))
+
+    def get(self):
+        self.post()
+
 class WarmupHandler(webapp2.RequestHandler):
 
     def get(self):
@@ -125,6 +135,7 @@ application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/_ah/warmup', WarmupHandler),
     ('/json/translation', JsonHandler),
+    ('/api', ApiPage)
 ], debug=True)
 application.error_handlers[404] = handle_error
 application.error_handlers[400] = handle_error
